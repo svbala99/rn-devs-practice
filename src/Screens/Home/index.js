@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 // user imports
 import { logout } from '../../redux/actions/auth';
-import { addCountRequest } from '../../redux/actions/count';
+import { addCountRequest, subCountRequest } from '../../redux/actions/count';
 
 /**
  * @function Home
@@ -22,10 +22,10 @@ function Home() {
 				justifyContent: 'center',
 				backgroundColor: 'white',
 			}}>
-			<Text style={{ color: 'black' }}>Home screen</Text>
+			{/* <Text style={{ color: 'black' }}>Home screen</Text> */}
 			<Pressable
 				onPress={() => dispatch(logout())}
-				style={{ backgroundColor: 'lightpink', padding: 8, borderRadius: 8 }}>
+				style={{ backgroundColor: 'lightpink', padding: 8, borderRadius: 8, marginLeft:300,marginBottom:150 }}>
 				<Text>Logout</Text>
 			</Pressable>
 
@@ -36,6 +36,7 @@ function Home() {
 					width: '100%',
 					justifyContent: 'space-around',
 					alignItems: 'center',
+					
 				}}>
 				<Pressable
 					onPress={() => {
@@ -49,14 +50,15 @@ function Home() {
 						height: 64,
 						alignItems: 'center',
 						justifyContent: 'center',
+						marginBottom:450
 					}}>
 					<Text>+</Text>
 				</Pressable>
-				<Text style={{ color: 'black', fontWeight: 'bold', fontSize: 32 }}>
+				<Text style={{ color: 'black', fontWeight: 'bold', fontSize: 50,paddingBottom:250 }}>
 					{countFromRedux}
 				</Text>
 				<Pressable
-					onPress={() => {}}
+					onPress={() => {dispatch(subCountRequest())}}
 					style={{
 						backgroundColor: 'lightblue',
 						padding: 8,
@@ -65,6 +67,7 @@ function Home() {
 						height: 64,
 						alignItems: 'center',
 						justifyContent: 'center',
+						marginBottom:450
 					}}>
 					<Text>-</Text>
 				</Pressable>

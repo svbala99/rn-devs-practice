@@ -3,6 +3,9 @@ import {
 	ADD_COUNT_LOADING,
 	ADD_COUNT_SUCCESS,
 	ADD_COUNT_ERROR,
+	SUB_COUNT_LOADING,
+	SUB_COUNT_SUCCESS,
+	SUB_COUNT_ERROR
 } from '../types/count';
 
 const initialState = {
@@ -30,6 +33,21 @@ const countReducer = (state = initialState, action = {}) => {
 			};
 		}
 		case ADD_COUNT_ERROR: {
+			return {
+				...state,
+			};
+		}
+		case SUB_COUNT_LOADING:{
+			return {
+				...state,
+			};
+		}
+		case SUB_COUNT_SUCCESS:{
+			return{
+				value: state.value - 1,
+			};
+		}
+		case SUB_COUNT_ERROR: {
 			return {
 				...state,
 			};
