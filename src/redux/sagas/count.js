@@ -2,7 +2,7 @@
 import { all, put, takeLatest, call } from 'redux-saga/effects';
 
 // actions
-import { addCountSuccess, addCountError, subCountSuccess, subCountError } from '../actions/count';
+import { addCountSuccess, addCountError, subCountSuccess, subCountError  } from '../actions/count';
 
 // types
 import { ADD_COUNT_LOADING, SUB_COUNT_LOADING } from '../types/count';
@@ -24,7 +24,7 @@ function* decrementSaga() {
 
 function* workerSaga() {
 	yield takeLatest(ADD_COUNT_LOADING, incrementSaga);
-	yield takeLatest(SUB_COUNT_LOADING, decrementSaga)
+	yield takeLatest(SUB_COUNT_LOADING, decrementSaga);
 }
 
 function* countSaga() {

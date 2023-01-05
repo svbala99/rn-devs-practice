@@ -5,7 +5,7 @@ import {
 	ADD_COUNT_ERROR,
 	SUB_COUNT_LOADING,
 	SUB_COUNT_SUCCESS,
-	SUB_COUNT_ERROR
+	SUB_COUNT_ERROR,
 } from '../types/count';
 
 const initialState = {
