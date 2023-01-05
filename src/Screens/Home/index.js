@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 // user imports
 import { logout } from '../../redux/actions/auth';
-import { addCountRequest } from '../../redux/actions/count';
+import { addCountRequest, subCountRequest } from '../../redux/actions/count';
 
 /**
  * @function Home
@@ -20,9 +20,11 @@ function Home() {
 				flex: 1,
 				alignItems: 'center',
 				justifyContent: 'center',
-				backgroundColor: 'white',
+				backgroundColor: '#c7c9c8',
 			}}>
-			<Text style={{ color: 'black' }}>Home screen</Text>
+			<Text style={{ color: 'black' , fontSize: 32, 
+			
+		}}>COUNT</Text>
 			<Pressable
 				onPress={() => dispatch(logout())}
 				style={{ backgroundColor: 'lightpink', padding: 8, borderRadius: 8 }}>
@@ -43,30 +45,45 @@ function Home() {
 					}}
 					style={{
 						backgroundColor: 'lightblue',
-						padding: 8,
+						// padding: 8,
 						borderRadius: 32,
 						width: 64,
 						height: 64,
 						alignItems: 'center',
 						justifyContent: 'center',
 					}}>
-					<Text>+</Text>
+					<Text style = {{fontSize : 50, 
+					alignContent: 'center',
+					justifyContent: 'center',
+					color: 'black'
+					// alignItems: 'center',
+					// alignSelf: 'center'
+					}}>+</Text>
 				</Pressable>
 				<Text style={{ color: 'black', fontWeight: 'bold', fontSize: 32 }}>
 					{countFromRedux}
 				</Text>
 				<Pressable
-					onPress={() => {}}
+					onPress={() => {dispatch(subCountRequest());}}
 					style={{
 						backgroundColor: 'lightblue',
-						padding: 8,
+						// padding: 8,
 						borderRadius: 32,
 						width: 64,
 						height: 64,
 						alignItems: 'center',
 						justifyContent: 'center',
 					}}>
-					<Text>-</Text>
+					<Text 
+					style = {{fontSize : 50, 
+					alignContent: 'center',
+					justifyContent: 'center',
+					color: 'black'
+					// alignItems: 'center',
+					// alignSelf: 'center'
+					}}>
+						-
+					</Text>
 				</Pressable>
 			</View>
 		</View>
