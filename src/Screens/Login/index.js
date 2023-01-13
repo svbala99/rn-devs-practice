@@ -5,7 +5,7 @@ import {
 	Text,
 	View,
 	TextInput,
-	TouchableOpacity,
+	Pressable,
 	StatusBar,
 } from 'react-native';
 import { useDispatch } from 'react-redux';
@@ -91,15 +91,15 @@ function Login() {
 				/>
 			</View>
 
-			<TouchableOpacity>
+			<Pressable>
 				<Text style={styles.forgot_button}>Forgot Password?</Text>
-			</TouchableOpacity>
+			</Pressable>
 
-			<TouchableOpacity
+			<Pressable
 				onPress={() => dispatch(loginRequest({ email, password }))}
 				style={styles.loginBtn}>
 				<Text style={styles.loginText}>LOGIN</Text>
-			</TouchableOpacity>
+			</Pressable>
 		</View>
 	);
 }

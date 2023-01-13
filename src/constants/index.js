@@ -1,6 +1,9 @@
 const screenTitles = {
-  HOME: 'Home',
   LOGIN: 'Login',
+  HOME: 'Home',
+  ADDNOTES: 'AddNotes',
+  EDIT: 'Edit',
+  //UPEDIT: 'Upedit'
 };
 
 const RoutingConstants = {

@@ -1,80 +1,112 @@
-// library imports
-import React from 'react';
-import { Pressable, Text, View } from 'react-native';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { AddTodo, RemoveTodo, EditTodo } from '../../redux/actions/addnotes';
+import { styles } from './style';
+import {
+	Text,
+	View,
+	TextInput,
+	Button,
+	FlatList,
+	TouchableOpacity,
+	Image,
+	Alert,
+} from 'react-native';
 
-// user imports
-import { logout } from '../../redux/actions/auth';
-import { addCountRequest, subCountRequest } from '../../redux/actions/count';
-
-/**
- * @function Home
- * @returns {JSX}
- */
-function Home() {
+const Home = ({ navigation }) => {
+	const [title, setTitle] = useState('');
+	const [todoValue, setTodoValue] = useState('');
+	const [index, setIndex] = useState();
 	const dispatch = useDispatch();
-	const countFromRedux = useSelector((state) => state.count.value);
-	return (
-		<View
-			style={{
-				flex: 1,
-				alignItems: 'center',
-				justifyContent: 'center',
-				backgroundColor: 'white',
-			}}>
-			{/* <Text style={{ color: 'black' }}>Home screen</Text> */}
-			<Pressable
-				onPress={() => dispatch(logout())}
-				style={{ backgroundColor: 'lightpink', padding: 8, borderRadius: 8, marginLeft:300,marginBottom:150 }}>
-				<Text>Logout</Text>
-			</Pressable>
+	const data = useSelector((state) => state);
+	const todos = data.addnote.todos;
+	//console.log(todos);
+	const addTodo = () => {
+		dispatch(AddTodo({ title: title, description: todoValue }));
+		setTodoValue('');
+		setTitle('');
+	};
+	const removeTodo = (item) => {
+		const todoIndex = todos.indexOf(item);
+		if (todoIndex > -1) {
+			Alert.alert('Alert Message', 'Are you sure to delete this To-Do', [
+				{ text: 'NO', style: 'cancel' },
+				{ text: 'YES', onPress: () => dispatch(RemoveTodo(item)) },
+			]);
+		} else {
+			alert(`${todoValue} is not in the Todo List`);
+		}
+	};
 
-			<View
+	const renderTodoList = () => {
+		return (
+			<FlatList
+				data={todos}
+				renderItem={({ item }) => (
+					<View style={styles.todoView}>
+						<View style={styles.todoList}>
+							<Text>
+								Title:{item[0]}
+								{'\n'}
+							</Text>
+							<Text>Description:{item[1]}</Text>
+						</View>
+						<TouchableOpacity
+							style={styles.removeTodo}
+							onPress={() => removeTodo(item)}>
+							<Image
+								style={{ height: 20, width: 20 }}
+								source={require('/home/divum/Documents/ReactNative/rn-devs-practice/src/assets/DeleteSymbol.png')}></Image>
+						</TouchableOpacity>
+						<TouchableOpacity
+							style={styles.removeTodo}
+							onPress={() =>
+								navigation.navigate('Edit', {
+									data: item,
+									index: todos.indexOf(item),
+								})
+							}>
+							<Image
+								style={{ height: 20, width: 20, margin: 10 }}
+								source={require('/home/divum/Documents/ReactNative/rn-devs-practice/src/assets/EditSymbol.png')}></Image>
+						</TouchableOpacity>
+					</View>
+				)}
+			/>
+		);
+	};
+
+	return (
+		<View style={styles.main}>
+			<TextInput
+				style={styles.mainInput}
+				onChangeText={setTitle}
+				placeholder={'Title'}
+				value={title}
+			/>
+			<TextInput
+				style={styles.mainInput}
+				onChangeText={setTodoValue}
+				placeholder={'Description'}
+				value={todoValue}
+				multiline
+				numberOfLines={4}
+			/>
+			<Button name='increase' title='Add Todo' onPress={addTodo} />
+
+			<Text
 				style={{
-					flexDirection: 'row',
-					padding: 32,
-					width: '100%',
-					justifyContent: 'space-around',
-					alignItems: 'center',
-					
+					alignSelf: 'stretch',
+					paddingLeft: 20,
+					paddingTop: 30,
+					fontSize: 25,
+					color: 'black',
 				}}>
-				<Pressable
-					onPress={() => {
-						dispatch(addCountRequest());
-					}}
-					style={{
-						backgroundColor: 'lightblue',
-						padding: 8,
-						borderRadius: 32,
-						width: 64,
-						height: 64,
-						alignItems: 'center',
-						justifyContent: 'center',
-						marginBottom:450
-					}}>
-					<Text>+</Text>
-				</Pressable>
-				<Text style={{ color: 'black', fontWeight: 'bold', fontSize: 50,paddingBottom:250 }}>
-					{countFromRedux}
-				</Text>
-				<Pressable
-					onPress={() => {dispatch(subCountRequest())}}
-					style={{
-						backgroundColor: 'lightblue',
-						padding: 8,
-						borderRadius: 32,
-						width: 64,
-						height: 64,
-						alignItems: 'center',
-						justifyContent: 'center',
-						marginBottom:450
-					}}>
-					<Text>-</Text>
-				</Pressable>
-			</View>
+				List of Todos :
+			</Text>
+			{renderTodoList()}
 		</View>
 	);
-}
+};
 
-// exports
 export default Home;

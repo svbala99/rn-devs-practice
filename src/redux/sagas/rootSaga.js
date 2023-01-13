@@ -3,7 +3,8 @@ import { all, call } from 'redux-saga/effects';
 
 // user imports
 import authSaga from './auth';
-import countSaga from './count';
+import addnotesSaga from './addnotes';
+//import countSaga from './count';
 
 /**
  * @function rootSaga
@@ -11,7 +12,8 @@ import countSaga from './count';
  * @description top level saga - MASTER
  */
 function* rootSaga() {
-	yield all([call(authSaga), call(countSaga)]);
+	yield all([call(authSaga)]);
+	yield all([call(addnotesSaga)]);
 }
 
 // exports

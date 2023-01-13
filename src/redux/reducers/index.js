@@ -5,7 +5,8 @@ import { persistReducer } from 'redux-persist';
 
 // user imports
 import authReducer from './auth';
-import countReducer from './count';
+import addReducer from './addnotes';
+//import countReducer from './count';
 
 // persist config - rehydrating the store
 const userPersistConfig = {
@@ -13,14 +14,20 @@ const userPersistConfig = {
 	storage: AsyncStorage,
 };
 
-const countPersistConfig = {
-	key: 'count',
+const addnotesPersistConfig = {
+	key: 'addnotes',
 	storage: AsyncStorage,
 };
 
+// const countPersistConfig = {
+// 	key: 'count',
+// 	storage: AsyncStorage,
+// };
+
 const AppReducer = combineReducers({
 	auth: persistReducer(userPersistConfig, authReducer),
-	count: persistReducer(countPersistConfig, countReducer),
+	addnote: persistReducer(addnotesPersistConfig, addReducer),
+	//count: persistReducer(countPersistConfig, countReducer),
 });
 
 // exports
