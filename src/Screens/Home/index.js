@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+//import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { AddTodo, RemoveTodo, EditTodo } from '../../redux/actions/addnotes';
 import { styles } from './style';
@@ -18,6 +19,7 @@ const Home = ({ navigation }) => {
 	const [todoValue, setTodoValue] = useState('');
 	const [index, setIndex] = useState();
 	const dispatch = useDispatch();
+
 	const data = useSelector((state) => state);
 	const todos = data.addnote.todos;
 	//console.log(todos);
@@ -106,7 +108,7 @@ const Home = ({ navigation }) => {
 			</Text>
 			{renderTodoList()}
 		</View>
-	);
+	);	
 };
 
 export default Home;
